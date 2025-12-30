@@ -14,3 +14,9 @@ WEEK 2:
 Set up PostgreSQL (production) / SQLite (local).
 Implement REST endpoints for registration/login (JWT), user profile CRUD.
 Initial frontend React app skeleton and authentication flow (login/register pages).
+
+week-3
+
+Implement Profile model (portfolio, skills, hourly rate, availability).
+Project posting endpoints: create, read, update, delete (Clients).
+Implement search/filter APIs (by skill, budget, duration)
