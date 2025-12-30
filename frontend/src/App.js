@@ -1,24 +1,61 @@
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Login from "./auth/Login";
+import Register from "./auth/Register";
+import ProjectList from "./pages/ProjectList";
+import ProjectDetail from "./pages/ProjectDetail";
+import CreateProject from "./pages/CreateProject";
+import MyProposals from "./pages/MyProposals";
+import Navbar from "./components/Navbar";
+import PrivateRoute from "./routes/PrivateRoute";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <Navbar />
+
+      <Routes>
+        {/* PUBLIC */}
+        <Route path="/" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+
+        {/* PROTECTED */}
+        <Route
+          path="/projects"
+          element={
+            <PrivateRoute>
+              <ProjectList />
+            </PrivateRoute>
+          }
+        />
+
+        <Route
+          path="/projects/:id"
+          element={
+            <PrivateRoute>
+              <ProjectDetail />
+            </PrivateRoute>
+          }
+        />
+
+        <Route
+          path="/projects/create"
+          element={
+            <PrivateRoute>
+              <CreateProject />
+            </PrivateRoute>
+          }
+        />
+
+        <Route
+          path="/my-proposals"
+          element={
+            <PrivateRoute>
+              <MyProposals />
+            </PrivateRoute>
+          }
+        />
+      </Routes>
+    </BrowserRouter>
   );
 }
 

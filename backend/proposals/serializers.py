@@ -4,15 +4,16 @@ from .models import Proposal
 
 class ProposalSerializer(serializers.ModelSerializer):
     freelancer = serializers.StringRelatedField(read_only=True)
-    project = serializers.StringRelatedField(read_only=True)
 
     class Meta:
         model = Proposal
-        fields = (
+        fields = [
             'id',
-            'project',
-            'freelancer',
+            'project',        # project ID will be sent from frontend
+            'freelancer',     # auto-filled from logged-in user
             'cover_letter',
-            'proposed_price',
-            'submitted_at',
-        )
+            'bid_amount',
+            'status',
+            'created_at',
+        ]
+        read_only_fields = ['freelancer', 'status', 'created_at']
