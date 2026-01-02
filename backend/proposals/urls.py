@@ -1,7 +1,14 @@
 from django.urls import path
-from .views import ProposalCreateAPIView, MyProposalsAPIView
+from .views import (
+    ProposalCreateView,
+    MyProposalsView,
+    ProjectProposalsView,
+    ProposalDecisionView,
+)
 
 urlpatterns = [
-    path("submit/", ProposalCreateAPIView.as_view(), name="submit-proposal"),
-    path("my/", MyProposalsAPIView.as_view(), name="my-proposals"),
+    path('create/', ProposalCreateView.as_view()),
+    path('my/', MyProposalsView.as_view()),
+    path('project/<int:project_id>/', ProjectProposalsView.as_view()),
+    path('decision/<int:proposal_id>/', ProposalDecisionView.as_view()),
 ]

@@ -1,61 +1,59 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Login from "./auth/Login";
-import Register from "./auth/Register";
-import ProjectList from "./pages/ProjectList";
-import ProjectDetail from "./pages/ProjectDetail";
-import CreateProject from "./pages/CreateProject";
-import MyProposals from "./pages/MyProposals";
-import Navbar from "./components/Navbar";
-import PrivateRoute from "./routes/PrivateRoute";
+import React from "react";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
+
+import Login from "./pages/Login";
+import Register from "./pages/Register";
+import Projects from "./pages/Projects";
+import ProjectProposals from "./pages/ProjectProposals";
+
+import { getToken } from "./utils/auth";
+
+// 🔐 Protected Route
+const PrivateRoute = ({ children }) => {
+  const token = getToken();
+  return token ? children : <Navigate to="/login" replace />;
+};
 
 function App() {
   return (
-    <BrowserRouter>
-      <Navbar />
-
+    <Router>
       <Routes>
-        {/* PUBLIC */}
-        <Route path="/" element={<Login />} />
+        {/* Default */}
+        <Route path="/" element={<Navigate to="/login" replace />} />
+
+        {/* Auth */}
+        <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
 
-        {/* PROTECTED */}
+        {/* Projects */}
         <Route
           path="/projects"
           element={
             <PrivateRoute>
-              <ProjectList />
+              <Projects />
             </PrivateRoute>
           }
         />
 
+        {/* Client → View Proposals */}
         <Route
-          path="/projects/:id"
+          path="/projects/:projectId/proposals"
           element={
             <PrivateRoute>
-              <ProjectDetail />
+              <ProjectProposals />
             </PrivateRoute>
           }
         />
 
-        <Route
-          path="/projects/create"
-          element={
-            <PrivateRoute>
-              <CreateProject />
-            </PrivateRoute>
-          }
-        />
-
-        <Route
-          path="/my-proposals"
-          element={
-            <PrivateRoute>
-              <MyProposals />
-            </PrivateRoute>
-          }
-        />
+        {/* Catch-all */}
+        <Route path="*" element={<Navigate to="/login" replace />} />
       </Routes>
-    </BrowserRouter>
+    </Router>
   );
 }
 

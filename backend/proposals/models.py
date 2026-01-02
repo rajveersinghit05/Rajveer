@@ -1,8 +1,6 @@
 from django.db import models
-from django.conf import settings
+from users.models import User
 from projects.models import Project
-
-User = settings.AUTH_USER_MODEL
 
 
 class Proposal(models.Model):
@@ -40,5 +38,8 @@ class Proposal(models.Model):
 
     created_at = models.DateTimeField(auto_now_add=True)
 
+    class Meta:
+        unique_together = ('project', 'freelancer')
+
     def __str__(self):
-        return f"{self.freelancer} → {self.project}"
+        return f"{self.freelancer.username} → {self.project.title}"

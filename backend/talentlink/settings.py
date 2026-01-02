@@ -39,15 +39,14 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'corsheaders',
 
-    # Project apps
-    'users.apps.UsersConfig',
-    'contracts.apps.ContractsConfig',
-    'messages_app.apps.MessagesAppConfig',
-    'projects.apps.ProjectsConfig',
-    'proposals.apps.ProposalsConfig',
-    'reviews.apps.ReviewsConfig',
-    'skills.apps.SkillsConfig',
-    'userprofiles.apps.UserprofilesConfig',
+    # Project apps (FINAL for Milestone 1 & 2)
+    'users',
+    'projects',
+    'proposals',
+    'contracts',
+    'chat',
+    'profiles',
+    
 ]
 
 

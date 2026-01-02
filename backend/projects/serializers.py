@@ -3,15 +3,22 @@ from .models import Project
 
 
 class ProjectSerializer(serializers.ModelSerializer):
-    client = serializers.StringRelatedField(read_only=True)
+    client_username = serializers.CharField(
+        source='client.username',
+        read_only=True
+    )
 
     class Meta:
         model = Project
         fields = [
-            "id",
-            "title",
-            "description",
-            "budget",
-            "client",
-            "created_at",
+            'id',
+            'client',
+            'client_username',
+            'title',
+            'description',
+            'budget',
+            'duration',
+            'required_skills',
+            'created_at',
         ]
+        read_only_fields = ['client', 'created_at']
