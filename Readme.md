@@ -22,7 +22,6 @@ Project posting endpoints: create, read, update, delete (Clients).
 Implement search/filter APIs (by skill, budget, duration)
 
 WEEK-4
-week-4
 
 Proposal model & endpoints: freelancers submit proposals; clients view/manage 
 proposals.
